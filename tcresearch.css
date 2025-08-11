@@ -100,6 +100,7 @@
 }
 #aspects_used_list {
 	padding-left:0;
+	background:#272626;
 }
 #aspects_used_list > li {
 	width: 32px;
