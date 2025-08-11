@@ -57,10 +57,12 @@
 .result > li {
 	margin-bottom:10px;
 	text-align:center;
+	color:#999;
 }
 .result > .aspect_result {
 	border:1px solid #e8e8e8;
 	padding:5px;
+	color:#999;
 }
 .result > li img {
 	margin:4px 5px 0 0;
@@ -93,7 +95,7 @@
 	font-size:small;
 }
 #aspects_used {
-	border-top:2px solid #c2c2c2;
+	border-top:2px solid #2c2c2c;
 	padding:5px;
 }
 #aspects_used_list {
