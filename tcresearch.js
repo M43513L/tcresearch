@@ -1,9 +1,10 @@
 $(function(){
-	var latest_version = "GT:NH";
+	var latest_version = "5.1.3";
 	$.each(version_dictionary, function(key,version){
 		$("#version").append("<option value="+key+">"+key+"</option>");
 	});
 	var aspects = [];
+	var addon_aspects;
 	var combinations = {};
 	$("#version").val(latest_version);
 	var version=latest_version;
@@ -49,8 +50,23 @@ $(function(){
 		visited = {};
 		return search(queue, to, visited);
 	}
-},
 	function push_addons(aspects, combinations) {
+		addon_aspects = [];
+		addon_array = addon_dictionary;
+		$.each(addon_dictionary, function(key, addon_info){
+			$("#addons").append('<input type="checkbox" class="addon_toggle" id="'+key+'" /> <label for="'+key+'">'+addon_info["name"]+'</label>');
+			$.each(addon_info["aspects"], function(number, aspect){
+				addon_aspects.push(aspect);
+			});
+			$.each(addon_info["combinations"], function(combination_name, combination){
+				combinations[combination_name]=combination;
+			});
+		});
+		addon_aspects = addon_aspects.sort(aspectSort);
+		$.each(addon_aspects, function(number, aspect){
+			aspects.push(aspect);
+		});
+	}
 	function toggle(obj) {
 		$(obj).find("img").attr("src", function(i,orig){ return (orig.indexOf("color") < 0) ? orig.replace(/mono/, "color") : orig.replace(/color/, "mono"); });
 		$(obj).toggleClass("unavail");
@@ -88,6 +104,19 @@ $(function(){
 	});
 	$('#addons').on("change", ".addon_toggle", function() {
 		addon = $(this).attr("id");
+		if (this.checked) {
+			addon_dictionary[addon]["aspects"].forEach(function(e){
+				var obj = $('#'+e);
+				obj.find("img").attr("src", function(i,orig){ return orig.replace(/mono/, "color"); });
+				obj.removeClass("unavail");
+			});
+		} else {
+			addon_dictionary[addon]["aspects"].forEach(function(e){
+				var obj = $('#'+e);
+				obj.find("img").attr("src", function(i,orig){ return orig.replace(/color/, "mono"); });
+				obj.addClass("unavail");
+			});
+		}
 	});
 	$("#sel_all").click(function(){
 		$(".aspect").each(function(){
