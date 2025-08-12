@@ -104,19 +104,6 @@ $(function(){
 	});
 	$('#addons').on("change", ".addon_toggle", function() {
 		addon = $(this).attr("id");
-		if (this.checked) {
-			addon_dictionary[addon]["aspects"].forEach(function(e){
-				var obj = $('#'+e);
-				obj.find("img").attr("src", function(i,orig){ return orig.replace(/mono/, "color"); });
-				obj.removeClass("unavail");
-			});
-		} else {
-			addon_dictionary[addon]["aspects"].forEach(function(e){
-				var obj = $('#'+e);
-				obj.find("img").attr("src", function(i,orig){ return orig.replace(/color/, "mono"); });
-				obj.addClass("unavail");
-			});
-		}
 	});
 	$("#sel_all").click(function(){
 		$(".aspect").each(function(){
