@@ -4,7 +4,6 @@ $(function(){
 		$("#version").append("<option value="+key+">"+key+"</option>");
 	});
 	var aspects = [];
-	var addon_aspects;
 	var combinations = {};
 	$("#version").val(latest_version);
 	var version=latest_version;
